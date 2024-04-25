@@ -1,0 +1,66 @@
+
+/* para sa tibuok na page wa sa lamay color*/
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+
+
+
+
+
+
+  /* header sa lamang */
+  header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  /* ang para sa logo */
+  .parasalogo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  /* flex ra lamang */
+  .nav {
+    display: flex;
+  }
+  
+  .nav li {
+    list-style: none;
+    margin-right: 20px;
+  }
+  
+  .nav li:last-child {
+    margin-right: 0;
+  }
+  
+  .nav a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+
+
+
+
+
+
+
+  
+  /* para sa responsive heehehe */
+  @media screen and (max-width: 600px) {
+    .nav {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .nav li {
+      margin: 10px 0;
+    }
+  }

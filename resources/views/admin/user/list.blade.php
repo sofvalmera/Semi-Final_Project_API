@@ -26,6 +26,8 @@
                             <td>sfddsfds</td>
                             <td>dfsdfdsf</td>
                             <td>sdadasd</td>
+                            <!-- <td>Edit</td>
+                            <td>Delete</td> -->
                             <td>
                             <a href="{{route('users.edit')}}">
                                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

@@ -1,5 +1,5 @@
 /* kini sa tibuok page */
-
+/* giusa na lang */
 
 * {
     margin: 0;
@@ -72,7 +72,7 @@ nav ul li a {
     width: 100%;
     border-collapse: collapse;
 }
-
+/* th para sa table head niya katong sa published date etc ag td iyang data */
 .post-list table th,
 .post-list table td {
     padding: 8px;

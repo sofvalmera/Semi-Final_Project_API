@@ -46,6 +46,8 @@ form {
     text-align: center; //di man mogana
 } */
 
+
+/* kini sa input type na css */
 input[type="text"],
 input[type="password"],
 input[type="number"],
@@ -73,6 +75,7 @@ input[type="submit"] {
     cursor: pointer;
 }
 
+/* sa submit button */
 input[type="submit"]:hover {
     background-color: #007bff; 
 }

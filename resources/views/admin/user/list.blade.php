@@ -5,7 +5,7 @@
 
             <div class="new-post-button">
                 <h1>Users</h1>
-                <a href="{{route('users.create')}}" class="btn">Add User</a>
+                <a href="{{route('users.create')}}" class="btn btn-back">Add User</a>
             </div>
             <div class="post-list">
                 <table>

@@ -4,7 +4,7 @@
 <div class="main-content">
             <div class="new-post-button">
                 <h1>Posts</h1>
-                <a href="{{route('posts.create')}}" class="btn">New Post</a>
+                <a href="{{route('posts.create')}}" class="btn btn-create">New Post</a>
             </div>
             <div class="post-list">
                 <table>
@@ -25,6 +25,8 @@
                             <td>Author Name 1</td>
                             <td>Project Name 1</td>
                             <td>2024-04-25</td>
+                            <!-- <td>Edit</td>
+                            <td>Delete</td> -->
                             <td>
                                 <a href="{{route('posts.edit')}}">
                                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

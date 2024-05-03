@@ -23,8 +23,8 @@ use App\Http\Controllers\admin\UserController;
 // });
 
 
-Route::get('/',[FrontController::class,'index'])->name('front.home');
-Route::get('/login1',[FrontController::class,'login'])->name('front.login');
+// Route::get('/',[FrontController::class,'index'])->name('front.home');
+Route::get('/',[FrontController::class,'login'])->name('front.login');
 // Route::get('/register',[FrontController::class,'register'])->name('front.register');
 // Route::post('/register', [FrontController::class, 'processRegister1'])->name('account.processRegister');
 Route::group(['middleware' => 'guest'], function () {

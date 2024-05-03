@@ -50,7 +50,7 @@
     <!-- <input type="submit" value="Login"> -->
     <button type="submit" class="button1">Login</button>
     <div class="pararegister">
-      <!-- Don't have an account? <a href="{{route('front.register')}}">Register</a> -->
+      <!-- Don't have an account? <a href="#">Register</a> -->
       <!-- Forgot Password? -->
       <a href="#">Forgot Password?</a> 
     </div>

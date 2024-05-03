@@ -11,11 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    /**
-     * Create User
-     * @param Request $request
-     * @return User 
-     */
+    
     public function apigetalluser(){
         $users = User::all();
         return response()->json($users);
@@ -24,7 +20,7 @@ class UserController extends Controller
     public function createUser(Request $request)
     {
         try {
-            //Validated
+          
             $validateUser = Validator::make($request->all(), 
             [
                 'name' => 'required',
@@ -66,11 +62,7 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Login The User
-     * @param Request $request
-     * @return User
-     */
+  
     public function loginUser(Request $request)
     {
         try {
@@ -96,11 +88,11 @@ class UserController extends Controller
             }
 
             $user = User::where('email', $request->email)->first();
-            //  $user = User::where('email', $request->email);
+          
 
             return response()->json([
                 'status' => true,
-                'message' => 'User Logged In Successfully',
+                'message' => 'Logged In Successfully',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
 

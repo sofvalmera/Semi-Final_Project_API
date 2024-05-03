@@ -27,10 +27,16 @@ class UserController extends Controller
             //Validated
             $validateUser = Validator::make($request->all(), 
             [
-                'name' => 'required',
+                'firstname' => 'required',
+                'lastname'=> 'required',
+                'middlename'=> 'required',
+                'address'=> 'required',
+                'gender'=> 'required',
+                'DOB'=> 'required',
                 'phone'=> 'required',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required',
+                'profile_image' => 'required',
               
              
             ]);
@@ -44,10 +50,16 @@ class UserController extends Controller
             }
 
             $user = User::create([
-                'name' => $request->name,
+                'firstname' => $request->firstname,
+                'lastname'=> $request->lastname,
+                'middlename'=> $request->middlename,
+                'address'=> $request->address,
+                'gender'=> $request->gender,
+                'DOB'=> $request->DOB,
                 'phone'=> $request->phone,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'profile_image' =>$request->profile_image,
                
                 
             ]);
@@ -95,12 +107,12 @@ class UserController extends Controller
                 ], 401);
             }
 
-            // $user = User::where('email', $request->email)->first();
-            $user = User::where('email', $request->email);
-            session()->flash('error','Email & Password does not match ');
+            $user = User::where('email', $request->email)->first();
+            //  $user = User::where('email', $request->email);
+
             return response()->json([
                 'status' => true,
-                'message' => 'Login Successfully',
+                'message' => 'User Logged In Successfully',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
 

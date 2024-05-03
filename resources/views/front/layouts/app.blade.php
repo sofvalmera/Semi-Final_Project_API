@@ -21,6 +21,31 @@
 
 </head>
 <body>
+<style>
+       #login-link,
+#signup-link {
+    background-color: #000000;
+    color: #ffffff; 
+    padding: 8px 12px;
+    margin-left: 8px;
+    border-radius: 8px; 
+}
+
+
+@media (max-width: 768px) {
+    #login-link,
+    #signup-link {
+        margin-left: 0; 
+        margin-top: 8px;
+        display: block; 
+        width: 100%; 
+        text-align: center;
+    }
+
+
+}
+
+    </style>
   <header>
     <!-- <div class="parasalogo">Try123</div> -->
     <div class="">Try123</div>
@@ -29,8 +54,8 @@
       <!-- <li><a href="/project/front/account/login.php">Login</a></li>
       <li><a href="/project/front/account/register.php">Register</a></li> -->
 
-      <li><a href="{{route('front.login')}}">Login</a></li>
-      <li><a href="{{route('front.register')}}">Register</a></li>
+      <li><a href="{{route('front.login')}}" class="nav-item nav-link" id="login-link">Login</a></li>
+      <!-- <li><a href="{{route('front.register')}}">Register</a></li> -->
 
         <!-- <li><a href="../account/login.php">Login</a></li>
         

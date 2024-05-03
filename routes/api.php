@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\PostController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,8 +27,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login', [UserController::class, 'loginUser']);
 // Route::post('/register', [UserController::class, 'createUser']);
 Route::middleware('auth:api')->group(function(){
-Route::get('/allusers',[UserController::class,'apigetalluser']);
-Route::post('/register', [UserController::class, 'createUser']);
+Route::get('/list',[UserController::class,'getAllUsers']);
+Route::post('/create', [UserController::class, 'createUser']);
+// Route::post('/edit', [UserController::class, 'UpdateUser']);
+// Route::post('/delete', [UserController::class, 'deleteUser']);
+
+// Route::get('/list',[PostController::class,'getAllPosts']);
+// Route::post('/create', [PostController::class, 'createPost']);
+// Route::post('/edit', [PostController::class, 'UpdatePost']);
+// Route::post('/delete', [PostController::class, 'deletePost']);
 });
 
 // Route::get('/users/list',[UserController::class,'list'])->name('users.list');

@@ -55,7 +55,7 @@
       <li><a href="/project/front/account/register.php">Register</a></li> -->
 
       <li><a href="{{route('front.login')}}" class="nav-item nav-link" id="login-link">Login</a></li>
-      <!-- <li><a href="{{route('front.register')}}">Register</a></li> -->
+      <!-- <li><a href="#">Register</a></li> -->
 
         <!-- <li><a href="../account/login.php">Login</a></li>
         

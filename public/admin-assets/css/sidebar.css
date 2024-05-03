@@ -25,7 +25,7 @@ body {
 
 nav {
     flex: 0 0 250px;
-    background-color: #212529;
+    /* background-color: #212529; */
     background-color: #007bff;
     color: #fff;
     padding: 20px;
@@ -208,7 +208,17 @@ a-f {
     display: inline-block;
     margin-right: 10px;
 }
-
+.button1 {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 10px;
+}
 
 /* dashboard ni */
 
@@ -248,6 +258,7 @@ a-f {
     
     text-decoration: none;
     color: #007bff;
+    /* color:black; */
     cursor: pointer;
 }
 

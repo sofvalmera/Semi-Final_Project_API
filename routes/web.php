@@ -5,7 +5,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\PostController;
 use App\Http\Controllers\admin\UserController;
-
+// use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,11 +24,15 @@ use App\Http\Controllers\admin\UserController;
 
 
 
+// Route::group(['middleware' => 'guest'], function () {
+  
+    
+//     });
+    Route::get('/',[FrontController::class,'index'])->name('front.home');
 
-Route::get('/',[FrontController::class,'index'])->name('front.home');
-
-Route::get('/register',[FrontController::class,'register'])->name('front.register');
-Route::get('/login',[FrontController::class,'login'])->name('front.login');
+    Route::get('/register',[FrontController::class,'register'])->name('front.register');
+    Route::post('/register', [FrontController::class, 'processRegister1'])->name('account.processRegister');
+    Route::get('/login1',[FrontController::class,'login'])->name('front.login');
 
 Route::get('/dashboard',[HomeController::class,'dashboard'])->name('admin.dashboard');
 

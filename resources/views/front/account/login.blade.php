@@ -16,27 +16,91 @@
 </head>
 <body>
 
+<!-- <div class="container">
+            @if (Session::has('success'))
+                <div class="alert alert-success">
+                        {{Session::get('success')}}
+                </div>  
+            @endif -->
+ 
 <div class="container">
-  <form action="{{route('admin.dashboard')}}" >
+<!-- <div class="container"> -->
+
+<!-- <div> -->
+<!-- @if (Session::has('error'))
+                <div class="alert alert-error">
+                        {{Session::get('error')}}
+                </div>  
+            @endif -->
+            <!-- <h6 id="message"></h6> -->
+         
+  <form method="POST" id="loginform" >
   <!-- method="post" id="loginform"> -->
     <!-- <h2>Login</h2> -->
     <h2>
       <center>Login</center>
     </h2>
     <div class="input-container">
-      <input type="email" placeholder="Email" name="email" required>
+      <input type="email" placeholder="Email" id="email" name="email" required>
     </div>
     <div class="input-container">
-      <input type="password" placeholder="Password" name="password" required>
+      <input type="password" placeholder="Password" id="password" name="password" required>
     </div>
-    <input type="submit" value="Login">
+    <center><h6 id="message"></h6></center>
+    <!-- <input type="submit" value="Login"> -->
+    <button type="submit" class="button1">Login</button>
     <div class="pararegister">
       Don't have an account? <a href="{{route('front.register')}}">Register</a>
     </div>
   </form>
 </div>
-<script>
+<!-- <script>
  
-</script>
+</script> -->
+<script>
+        document.getElementById('loginform').addEventListener('submit',function(event){
+            event.preventDefault();
+
+
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+     
+         var data = {
+             email: email,
+             password: password,
+         }
+            fetch("http://127.0.0.1:8000/api/login",{
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Accept: 'application/json',
+                  Authorization: 'Bearer' + localStorage.getItem('token')
+                  
+                },
+                body: JSON.stringify(data),
+               
+            })
+            .then((res) => {
+                return res.json();
+            })
+            .then(data => {
+                console.log(data);
+                if(data.status){
+                localStorage.setItem('token', data.token);
+                // document.getElementById('message').innerText = data.message;
+                // document.getElementById('message').style.color = 'green';
+                window.location.href = '/dashboard';
+                }else{
+                  document.getElementById('message').innerText = data.message;
+                  document.getElementById('message').style.color = 'red';
+                }
+            })
+            .catch(error => {
+                console.error("Something went wrong!", error);
+            })
+        })
+
+    </script>
+
 </body>
 </html>

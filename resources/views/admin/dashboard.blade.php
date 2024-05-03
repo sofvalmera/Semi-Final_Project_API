@@ -1,5 +1,11 @@
 @extends('admin.layouts.sidebar')
 @section('content')
+<script>
+    const token = localStorage.getItem('token');
+    if(!token){
+      window.location.href = '/login1';
+    }
+    </script>
         <div class="main-content-1">
             <div class="new-post-button">
                 <h1>Dashboard</h1>
@@ -13,12 +19,12 @@
                         <h2>Total Users</h2>
                         <p>200</p> 
                         <br>
-                        <p><a href="{{route('users.list')}}" class="see-more-link">See More...</a></p>
+                        <p><a href="{{route('users.list')}}" class="see-more-link"><b>See More...</b></a></p>
                     </div>
                     <div class="post-stats">
                         <h2>Total Posts</h2>
                         <p>200</p><br> 
-                        <p><a href="{{route('posts.list')}}" class="see-more-link">See More...</a></p>
+                        <p><a href="{{route('posts.list')}}" class="see-more-link"><b>See More...</b></a></p>
                     </div>
                 </div>
             </div>

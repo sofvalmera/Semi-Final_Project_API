@@ -27,16 +27,10 @@ class UserController extends Controller
             //Validated
             $validateUser = Validator::make($request->all(), 
             [
-                'firstname' => 'required',
-                'lastname'=> 'required',
-                'middlename'=> 'required',
-                'address'=> 'required',
-                'gender'=> 'required',
-                'DOB'=> 'required',
+                'name' => 'required',
                 'phone'=> 'required',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required',
-                'profile_image' => 'required',
               
              
             ]);
@@ -50,16 +44,10 @@ class UserController extends Controller
             }
 
             $user = User::create([
-                'firstname' => $request->firstname,
-                'lastname'=> $request->lastname,
-                'middlename'=> $request->middlename,
-                'address'=> $request->address,
-                'gender'=> $request->gender,
-                'DOB'=> $request->DOB,
+                'name' => $request->firstname,
                 'phone'=> $request->phone,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'profile_image' =>$request->profile_image,
                
                 
             ]);
@@ -103,7 +91,7 @@ class UserController extends Controller
             if(!Auth::attempt($request->only(['email', 'password']))){
                 return response()->json([
                     'status' => false,
-                    'message' => 'Email & Password does not match with our record.',
+                    'message' => 'Email & Password does not match.',
                 ], 401);
             }
 

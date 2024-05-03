@@ -14,6 +14,14 @@ class AdminLogInController extends Controller
     public function index(){
         return view('admin.login');
     }
+    
+
+
+
+
+
+
+
     // public function authenticate(Request $request){
     //     $validator= Validator::make($request->all(),[
     //         'email' => 'required|email',

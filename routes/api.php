@@ -24,19 +24,23 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 
 });
-Route::post('/login', [UserController::class, 'loginUser']);
+Route::post('/login', [UserController::class, 'login']);
 // Route::post('/register', [UserController::class, 'createUser']);
-Route::middleware('auth:api')->group(function(){
+// Route::middleware('auth:api')->group(function(){
 Route::get('/list',[UserController::class,'getAllUsers']);
 Route::post('/create', [UserController::class, 'createUser']);
-// Route::post('/edit', [UserController::class, 'UpdateUser']);
-// Route::post('/delete', [UserController::class, 'deleteUser']);
+// Route::put('/edit', [UserController::class, 'UpdateUser']);
+// Route::destroy('/delete', [UserController::class, 'deleteUser']);
 
 // Route::get('/list',[PostController::class,'getAllPosts']);
 // Route::post('/create', [PostController::class, 'createPost']);
-// Route::post('/edit', [PostController::class, 'UpdatePost']);
-// Route::post('/delete', [PostController::class, 'deletePost']);
-});
+// Route::put('/edit', [PostController::class, 'UpdatePost']);
+// Route::destroy('/delete', [PostController::class, 'deletePost']);
+
+
+
+
+// });
 
 // Route::get('/users/list',[UserController::class,'list'])->name('users.list');
 // Route::get('/users/create',[UserController::class,'create'])->name('users.create');

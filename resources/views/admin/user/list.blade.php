@@ -87,7 +87,7 @@
         }
     })
     .catch(error=>{
-        console.error('something went wrong with your fetch!', error);
+        console.error('something went wrong!', error);
     })
     
 

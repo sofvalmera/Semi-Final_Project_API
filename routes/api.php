@@ -31,6 +31,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/getallusers',[UserController::class,'getAllUsers']);
 Route::post('/insertuser', [UserController::class, 'createUser']);
 Route::delete('/deleteuser', [UserController::class, 'deleteUser']);
+
+Route::get('/getallposts',[PostController::class,'getAllPosts']);
+Route::post('/insertpost', [PostController::class, 'createPost']);
+Route::delete('/deletepost', [PostController::class, 'deletePost']);
 // Route::put('/edit', [UserController::class, 'UpdateUser']);
 // Route::destroy('/delete', [UserController::class, 'deleteUser']);
 

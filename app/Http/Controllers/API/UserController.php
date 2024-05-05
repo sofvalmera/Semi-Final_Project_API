@@ -31,114 +31,76 @@ class UserController extends Controller
         
     }
 
+
     public function createUser(Request $request)
     {
-        $newUser = [
-            'name' => $request['name'],
-            'phone' => $request['phone'],
-            'email' => $request['email'],
-            'password' => $request['password']
-        ];
-
-        $created = User::create($newUser);
-
-        if (!$created) {
-            return [
-                'status' => 500,
-                'error' => 'User Creation Failed'
-            ];
+        if ($request->METHOD() !== 'POST') {
+            return response()->json(['message' => 'POST method required.'], 400);
         }
-
-        return [
-            'status' => 201,
-            'message' => 'User Created Successfully'
-        ];
-    }
-
-    // public function createUser(Request $request)
-    // {
-    //     try {
-          
-    //         $validateUser = Validator::make($request->all(), 
-    //         [
-    //             'name' => 'required',
-    //             'phone'=> 'required',
-    //             'email' => 'required|email|unique:users,email',
-    //             'password' => 'required',
-              
-             
-    //         ]);
-
-    //         if($validateUser->fails()){
-    //             return response()->json([
-    //                 'status' => false,
-    //                 'message' => 'error',
-    //                 'errors' => $validateUser->errors()
-    //             ], 401);
-    //         }
-
-    //         $user = User::create([
-    //             'name' => $request->firstname,
-    //             'phone'=> $request->phone,
-    //             'email' => $request->email,
-    //             'password' => Hash::make($request->password),
-               
-                
-    //         ]);
-
-    //         return response()->json([
-    //             'status' => true,
-    //             'message' => 'User Created Successfully',
-    //             'token' => $user->createToken("API TOKEN")->plainTextToken
-    //         ], 200);
-
-    //     } catch (\Throwable $th) {
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => $th->getMessage()
-    //         ], 500);
-    //     }
-    // }
-
-  
-    public function login(Request $request)
-    {
-        try {
-            $validateUser = Validator::make($request->all(), 
-            [
-                'email' => 'required|email',
-                'password' => 'required'
-            ]);
-
-            if($validateUser->fails()){
-                return response()->json([
-                    'status' => false,
-                    'message' => 'validation error',
-                    'errors' => $validateUser->errors()
-                ], 401);
-            }
-
-            if(!Auth::attempt($request->only(['email', 'password']))){
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Email & Password does not match.',
-                ], 401);
-            }
-
-            $user = User::where('email', $request->email)->first();
-          
-
+    
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'phone' => 'required|digits_between:1,11|numeric',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:4',
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()->first()], 400);
+        }
+    
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->phone = $request->input('phone');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password')); 
+    
+        $existingUser = User::where('email', $user->email)->first();
+        if ($existingUser) {
+            return response()->json(['message' => 'Email already exists.'], 400);
+        }
+    
+        if ($user->save()) {
             return response()->json([
-                'status' => true,
-                'message' => 'LogIn Successfully',
+                'message' => 'Inserted Successfully.',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
-
-        } catch (\Throwable $th) {
-            return response()->json([
-                'status' => false,
-                'message' => $th->getMessage()
-            ], 500);
+        } else {
+            return response()->json(['message' => 'Insert failed.'], 500);
         }
     }
+
+    public function deleteUser(Request $request)
+{
+    if ($request->method() !== 'DELETE') {
+        return response()->json(['message' => 'DELETE method required.'], 400);
+    }
+
+    $validator = Validator::make($request->all(), [
+        'id' => 'required|integer'
+    ], [
+        'id.required' => 'The id field is required.'
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json(['errors' => $validator->errors()], 400);
+    }
+
+    $id = $request->input('id');
+
+    $user = User::find($id);
+
+    if (!$user) {
+        return response()->json(['message' => 'User Not Found.'], 404);
+    }
+
+    if ($user->delete()) {
+        return response()->json(['message' => 'User deleted successfully.'], 200);
+    } else {
+        return response()->json(['message' => 'Failed to delete user.'], 500);
+    }
+}
+
+   
+   
 }

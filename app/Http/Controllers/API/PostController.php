@@ -55,10 +55,7 @@ class PostController extends Controller
         $post->projectname = $request->input('projectname');
         $post->publisheddate = $request->input('publisheddate');
     
-        $existingpost = Post::where('projectname', $post->projectname)->first();
-        if ($existingpost) {
-            return response()->json(['message' => 'projectname already exists.'], 400);
-        }
+       
     
         if ($post->save()) {
             return response()->json([

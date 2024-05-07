@@ -26,8 +26,10 @@ public function login(Request $request)
             'errors' => $validateUser->errors()
         ], 401);
     }
-
+    
     if (!Auth::attempt($request->only(['email', 'password']))) {
+        // return redirect()->route('front.login')->with('error','Dili ka Pwede ngari! Pang Admin ra ni!');        
+        // $request->session()->flash('error',' Email & Password does not match.');
         return response()->json([
             'status' => false,
             'message' => 'Email & Password does not match.',

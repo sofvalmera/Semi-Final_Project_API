@@ -14,6 +14,7 @@
      ?>
   </style>
 </head>
+@include('front.message')
 <body>
 
 <!-- <div class="container">
@@ -27,13 +28,13 @@
 <!-- <div class="container"> -->
 
 <!-- <div> -->
-<!-- @if (Session::has('error'))
-                <div class="alert alert-error">
+            @if (Session::has('error'))
+                <div id="error" class="alert alert-error">
                         {{Session::get('error')}}
                 </div>  
-            @endif -->
+            @endif
             <!-- <h6 id="message"></h6> -->
-         
+  <center><h6 id="message"></h6></center>
   <form method="POST" id="loginform" >
   <!-- method="post" id="loginform"> -->
     <!-- <h2>Login</h2> -->
@@ -46,7 +47,7 @@
     <div class="input-container">
       <input type="password" placeholder="Password" id="password" name="password" required>
     </div>
-    <center><h6 id="message"></h6></center>
+   
     <!-- <input type="submit" value="Login"> -->
     <button type="submit" class="button1">Login</button>
     <div class="pararegister">
@@ -95,6 +96,7 @@
                 }else{
                   document.getElementById('message').innerText = data.message;
                   document.getElementById('message').style.color = 'red';
+                  // document.getElementById('error');
                 }
             })
             .catch(error => {

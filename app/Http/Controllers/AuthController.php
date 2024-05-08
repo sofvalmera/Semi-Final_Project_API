@@ -27,21 +27,22 @@ class AuthController extends Controller
             ], 401);
         }
         
-        if (!Auth::attempt($request->only(['email', 'password']))) {
+        if (Auth::attempt($request->only(['email', 'password']))) {
+            $user = User::where('email', $request->email)->first();
+    
+            return response()->json([
+                'status' => true,
+                'message' => 'LogIn Successfully',
+                'token' => $user->createToken("API TOKEN")->plainTextToken,
+                'error' => Session::get('error'),
+                'success' => Session::get('success'),
+            ], 200);
+        }
             return response()->json([
                 'status' => false,
                 'message' => 'Email & Password does not match.',
             ], 401);
-        }
     
-        $user = User::where('email', $request->email)->first();
-    
-        return response()->json([
-            'status' => true,
-            'message' => 'Successfully Login',
-            'token' => $user->createToken("API TOKEN")->plainTextToken,
-            'error' => Session::get('error'),
-            'success' => Session::get('success'),
-        ], 200);
+        
     }
 }

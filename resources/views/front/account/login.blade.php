@@ -28,7 +28,7 @@
     <form method="POST" id="loginform">
         <h2>Login</h2>
         <div class="input-container">
-            <input type="email" placeholder="Email" id="email" name="email" required>
+            <input type="email" placeholder="Email Address" id="email" name="email" required>
         </div>
         <div class="input-container">
             <input type="password" placeholder="Password" id="password" name="password" required>

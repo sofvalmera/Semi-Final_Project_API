@@ -20,14 +20,14 @@
                         <!-- <p>200</p>  -->
                         <p>{{$countusers}}</p> 
                         <br>
-                        <p><a href="{{route('users.list')}}" class="see-more-link"><b>See More...</b></a></p>
+                        <p><a href="{{route('users.list')}}" class="see-more-link">See More...</a></p>
                     </div>
                     <div class="post-stats">
                         <h2>Total Posts</h2>
                         <!-- <p>200</p> -->
                         <p>{{$countposts}}</p>
                         <br> 
-                        <p><a href="{{route('posts.list')}}" class="see-more-link"><b>See More...</b></a></p>
+                        <p><a href="{{route('posts.list')}}" class="see-more-link">See More...</a></p>
                     </div>
                 </div>
             </div>

@@ -28,6 +28,11 @@ class AuthController extends Controller
         }
         
         if (Auth::attempt($request->only(['email', 'password']))) {
+
+            //add tali tag pra sa otp ngari or maghimo laing function
+            //tas ang .env ngita ag idea na gamay ray code na dali ra masabtan og masag o
+
+            
             $user = User::where('email', $request->email)->first();
     
             return response()->json([

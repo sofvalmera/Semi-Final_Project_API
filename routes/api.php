@@ -13,7 +13,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login', [AuthController::class, 'login'])->name('api.login');
 Route::post('/verify-otp', [AuthController::class, 'verifyOTP'])->name('api.verify.otp');
 
-Route::middleware('auth:sanctum')->group(function () {
+// Route::middleware('auth:sanctum')->group(function () {
     Route::get('/getallusers', [UserController::class, 'getAllUsers']);
     Route::post('/insertuser', [UserController::class, 'createUser']);
     Route::delete('/deleteuser', [UserController::class, 'deleteUser']);
@@ -21,5 +21,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/getallposts', [PostController::class, 'getAllPosts']);
     Route::post('/insertpost', [PostController::class, 'createPost']);
     Route::delete('/deletepost', [PostController::class, 'deletePost']);
-});
+// });
 

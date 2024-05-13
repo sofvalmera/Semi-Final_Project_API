@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\admin\HomeController;
+use App\Http\Controllers\admin\ProfileController;
 use App\Http\Controllers\admin\PostController;
 use App\Http\Controllers\admin\UserController;
 // use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,9 @@ Route::get('/',[FrontController::class,'login'])->name('front.login');
 Route::group(['middleware' => 'guest'], function () {
    
     Route::get('/dashboard',[HomeController::class,'dashboard'])->name('admin.dashboard');
+
+    Route::get('/profile',[ProfileController::class,'profile'])->name('profile.profile');
+
 
     Route::get('/posts/list',[PostController::class,'list'])->name('posts.list');
 Route::get('/posts/create',[PostController::class,'create'])->name('posts.create');

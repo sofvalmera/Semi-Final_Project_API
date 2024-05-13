@@ -5,7 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/form.css') }}">
-  
+    <style>
+body{
+  /* background-color: #424644; */
+}
+.boxform{
+  background-color: #313934;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+</style>
 </head>
 <body>
 <div class="container">
@@ -38,6 +48,20 @@
             <a href="#">Forgot Password?</a> 
         </div>
     </form>
+
+     <form id="otpform" class="mt-4 d-none" style="display: none;">
+     <h2>OTP Verification</h2>
+        <!-- <div class="mb-3"> -->
+        <div class="input-container">
+          <h3 id="otpmessage"></h3>
+          <!-- <div class="input-container"> -->
+            <!-- <input type="email" placeholder="Email Address" id="email" name="email" required> -->
+            <label for="otp" class="form-label">Enter OTP</label>
+            <input type="number" id="otp" name="otp" class="form-control" placeholder="OTP">
+        <!-- </div> -->
+        </div>
+        <button type="submit" id="loginBtn" class="form-control btn btn-primary">Verify OTP</button>
+      </form>
 </div>
 
 <script>
@@ -72,11 +96,18 @@
             console.log(data);
             if (data.status) {
                 localStorage.setItem('token', data.token);
-                window.location.href = '/dashboard';
+                // window.location.href = '/dashboard';
                 
-                document.getElementById('successMessage').querySelector('p').innerText = data.message;
-                successContainer.style.display = 'block';
+                document.getElementById('loginform').style.display = "none";
+                document.getElementById('otpform').style.display = "block";
+
+                document.getElementById('errorMessage').querySelector('p').innerText = data.message;
                 errorContainer.style.display = 'none';
+                successContainer.style.display = 'none';
+                
+                // document.getElementById('successMessage').querySelector('p').innerText = data.message;
+                // successContainer.style.display = 'block';
+                // errorContainer.style.display = 'none';
             } else {
                
                 document.getElementById('errorMessage').querySelector('p').innerText = data.message;
@@ -103,6 +134,56 @@
             console.error("Something went wrong!", error);
         });
     });
+
+   
+   
+    document.getElementById('otpform').addEventListener('submit',function(event){
+            event.preventDefault();
+
+        var otp = document.getElementById('otp').value;
+
+        data = {
+          otp: otp,
+        };
+
+        var token = localStorage.getItem('token');
+
+     
+
+        fetch("http://127.0.0.1:8000/api/verifyotp",{
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Accept: 'application/json',
+                  Authorization: 'Bearer ' + token,
+                  
+                },
+                body: JSON.stringify(data),
+               
+            }).then((res) => {
+              return res.json();
+            }).then(data => {
+              console.log(data);
+              if(data.status){
+                // document.getElementById('otpmessage').innerText = data.message;
+                // document.getElementById('otpmessage').style.color = 'green';
+                document.getElementById('successMessage').querySelector('p').innerText = data.message;
+                successContainer.style.display = 'block';
+                errorContainer.style.display = 'none';
+                window.location.href = '/dashboard';
+              }else{
+                document.getElementById('errorMessage').querySelector('p').innerText = data.message;
+                successContainer.style.display = 'none';
+                errorContainer.style.display = 'block';
+                // document.getElementById('otpmessage').innerText = data.message;
+                // document.getElementById('otpmessage').style.color = 'red';
+              }
+            }).catch(error => {
+              console.error("Something went wrong with your fetch!", error);
+            })
+        })
+
+      
 </script>
 </body>
 </html>

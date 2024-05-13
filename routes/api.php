@@ -11,7 +11,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/login', [AuthController::class, 'login'])->name('api.login');
-Route::post('/verify-otp', [AuthController::class, 'verifyOTP'])->name('api.verify.otp');
+// Route::post('/verifyotp', [UserController::class, 'verifyotp']);
+Route::post('/verifyotp', [AuthController::class, 'verifyotp']);
 
 // Route::middleware('auth:sanctum')->group(function () {
     Route::get('/getallusers', [UserController::class, 'getAllUsers']);

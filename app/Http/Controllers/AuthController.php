@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+// use 
 
 class AuthController extends Controller
 {
@@ -32,9 +33,25 @@ class AuthController extends Controller
             //add tali tag pra sa otp ngari or maghimo laing function
             //tas ang .env ngita ag idea na gamay ray code na dali ra masabtan og masag o
 
-            
+            // $otp= 
+            $user = Auth::user();
+            // $phonenumber
+            $code = rand(100000, 999999);
+            $user->update([
+                'otp_code' => $code,
+            ]);
+
+            // Http::withoutVerifying()->post('https://api.semaphore.co/api/v4/messages', [
+                //     'apikey' =>config('services.semaphore_key.key'),
+                //     'number' => '09201985437', 
+                //     'message' => 'This is your OTP code: ' . $code,
+                // ]);
+            // $token = auth()->user()->createToken('Test')->plainTextToken;
+
             $user = User::where('email', $request->email)->first();
-    
+            
+
+
             return response()->json([
                 'status' => true,
                 'message' => 'LogIn Successfully',
@@ -50,6 +67,54 @@ class AuthController extends Controller
     
         
     }
+    public function verifyotp(Request $request){
+        try{
+
+            $request->validate([
+                'otp' => 'required|min:6|max:6',
+            ]);
+
+        // Check if the user is authenticated
+        if (Auth::check()) {
+            $user = Auth::user();
+
+
+            if (!$user->otp_code) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'No OTP code found for the user'
+                ], 400);
+            }
+        
+            if ($request->otp === $user->otp_code) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'OTP verification successful'
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Invalid OTP'
+                ], 400);
+            }
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'User not authenticated'
+            ], 401);
+        }
+
+        }catch(\Throwable $h){
+            return response()->json([
+                'status' => false,
+                'message' => $h->getMessage()
+            ], 500);
+        }
+    }
+    
+
+   
 
     
+
 }
